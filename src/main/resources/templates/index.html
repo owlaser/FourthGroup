@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Owlaser</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<div style="text-align: center;margin:0 auto;width: 1000px; ">
+    <h1>开源组件</h1>
+
+    <form action="/down" method="GET">
+        groupId: <input type="text" name="groupId" />
+        artifactId: <input type="text" name="artifactId" />
+        version: <input type="text" name="version" />
+        <input type="submit" value="Submit" />
+    </form>
+
+    <!--/*@thymesVar id="error" type=""*/-->
+    <h3 style="color:red" th:if="${error == '下载失败，目标源不存在该组件'}">下载失败，目标源不存在该组件</h3>
+
+<br><br>
+    <form action="/search" method="GET">
+        name: <input type="text" name="name" />
+        <input type="submit" value="Search" />
+    </form>
+    <br>
+
+    <table width="100%" border="1" cellspacing="1" cellpadding="0">
+        <tr>
+            <td>包名</td>
+            <td>地址</td>
+            <td>groupId</td>
+            <td>artifactId</td>
+            <td>版本</td>
+        </tr>
+        <!--/*@thymesVar id="OscList" type=""*/-->
+        <tr th:each="Osc : ${OscList}">
+            <td th:text="${Osc.name}"></td>
+            <td th:text="${Osc.url}"></td>
+            <td th:text="${Osc.groupId}"></td>
+            <td th:text="${Osc.artifactId}"></td>
+            <td th:text="${Osc.version}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
